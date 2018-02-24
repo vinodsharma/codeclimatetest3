@@ -17,6 +17,12 @@ jobs:
             echo 'export SHELL_SCRIPT_TO_RUN_APP=run_app.sh' >> $BASH_ENV
 
       - run:
+          name: Setup Code Climate test-reporter
+          command: |
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+            chmod +x ./cc-test-reporter
+
+      - run:
           name: Building Docker Image
           command: |
             docker build -t  $DOCKER_IMAGE .
@@ -29,4 +35,6 @@ jobs:
               --env AWS_SECRET_ACCESS_KEY \
             -it $DOCKER_IMAGE /bin/bash -c \
               'source $VENV_DIR/bin/activate; \
-              pytest tests/test_*.py'
+              ./cc-test-reporter before-build; \
+              pytest --cov=src --cov-report=xml tests/test_*.py; \
+              ./cc-test-reporter after-build --coverage-input-type coverage.py  --exit-code $?'
