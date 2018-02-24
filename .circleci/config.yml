@@ -31,6 +31,7 @@ jobs:
           name: Running Tests
           command: |
             docker run \
+              --env CC_TEST_REPORTER_ID \
               --env AWS_ACCESS_KEY_ID \
               --env AWS_SECRET_ACCESS_KEY \
             -it $DOCKER_IMAGE /bin/bash -c \
