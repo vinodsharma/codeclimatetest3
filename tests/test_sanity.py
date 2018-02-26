@@ -31,3 +31,11 @@ def test_dummy_func2():
     o = dummy_func(True)
 
     assert eo == o
+
+
+def test_dummy_func3():
+    eo = 1
+
+    o = dummy_func(True)
+
+    assert eo == o
