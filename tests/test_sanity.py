@@ -5,6 +5,8 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 try:
     from src.dummy import dummy_func
     from src.dummy import dummy_func2
+    from src.dummy import dummy_func3
+    from src.dummy import dummy_func4
 except ImportError:
     raise Exception("src.dummy Import Error")
 
@@ -28,7 +30,7 @@ def test_dummy_func():
 def test_dummy_func2():
     eo = 1
 
-    o = dummy_func(True)
+    o = dummy_func2(True)
 
     assert eo == o
 
@@ -36,6 +38,14 @@ def test_dummy_func2():
 def test_dummy_func3():
     eo = 1
 
-    o = dummy_func(True)
+    o = dummy_func3(True)
+
+    assert eo == o
+
+
+def test_dummy_func4():
+    eo = 1
+
+    o = dummy_func4(True)
 
     assert eo == o
